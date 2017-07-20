@@ -49,6 +49,7 @@ public class BotMessageHandler extends ListenerAdapter{
 						break;
 					}
 				}
+				break;
 			case BC_PREFIX + "start":
 				if (command.length > 1) {
 					switch (command[1].toLowerCase()) {

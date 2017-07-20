@@ -13,7 +13,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 
 import net.dv8tion.jda.core.entities.TextChannel;
 
-public class AudioScheduler extends AudioEventAdapter{
+public class AudioScheduler extends AudioEventAdapter {
 	
 	private boolean repeating = false;
     final AudioPlayer player;

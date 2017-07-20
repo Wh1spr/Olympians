@@ -9,14 +9,14 @@ import wh1spr.olympians.template.Bot;
 public class Dionysus implements Bot{
 
 	private JDA jda = null;
-	private final String TOKEN = "[REDACTED]";
 
 	@Override
 	public JDA run() {
 		try {
 			jda = new JDABuilder(AccountType.BOT)
-			        .setToken(TOKEN).addEventListener()
+			        .setToken(BotControl.DIONYSUS_TOKEN).addEventListener()
 			        .buildBlocking();
+			BotControl.addBot(jda);
 		} catch (Exception e) {
 			System.out.println("[DIONYSUS] ERROR: Dionysus could not be initialized. " + e.getClass().getSimpleName());
 		}

@@ -10,14 +10,14 @@ import wh1spr.olympians.template.Bot;
 public class Zeus implements Bot{
 
 	private JDA jda = null;
-	private final String TOKEN = "[REDACTED]";
 
 	@Override
 	public JDA run() {
 		try {
 			jda = new JDABuilder(AccountType.BOT)
-			        .setToken(TOKEN).addEventListener(new BotMessageHandler())
+			        .setToken(BotControl.ZEUS_TOKEN).addEventListener(new BotMessageHandler())
 			        .buildBlocking();
+			BotControl.addBot(jda);
 		} catch (Exception e) {
 			System.out.println("[ZEUS] ERROR: Zeus could not be initialized. " + e.getClass().getSimpleName());
 		}

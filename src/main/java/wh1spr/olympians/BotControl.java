@@ -13,6 +13,10 @@ import wh1spr.olympians.zeus.Zeus;
 
 public class BotControl {
 	
+	public static final String APOLLO_TOKEN = "[REDACTED]";
+	public static final String DIONYSUS_TOKEN = "[REDACTED]";
+	public static final String ATHENA_TOKEN = "[REDACTED]";
+	public static final String ZEUS_TOKEN = "[REDACTED]";
 
 	//All the bots
 	private static Bot apollo = new Apollo();

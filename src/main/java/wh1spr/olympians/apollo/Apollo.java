@@ -10,14 +10,14 @@ import wh1spr.olympians.template.Bot;
 public class Apollo implements Bot{
 
 	private JDA jda = null;
-	private final String TOKEN = "[REDACTED]";
 
 	@Override
 	public JDA run() {
 		try {
 			jda = new JDABuilder(AccountType.BOT)
-			        .setToken(TOKEN).addEventListener(new MusicMessageHandler())
+			        .setToken(BotControl.APOLLO_TOKEN).addEventListener(new MusicMessageHandler())
 			        .buildBlocking();
+			BotControl.addBot(jda);
 		} catch (Exception e) {
 			System.out.println("[APOLLO] ERROR: Apollo could not be initialized. " + e.getClass().getSimpleName());
 		}
