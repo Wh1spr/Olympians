@@ -15,7 +15,7 @@ public class Zeus implements Bot{
 	public JDA run() {
 		try {
 			jda = new JDABuilder(AccountType.BOT)
-			        .setToken(BotControl.ZEUS_TOKEN).addEventListener(new BotMessageHandler())
+			        .setToken(BotControl.ZEUS_TOKEN).addEventListener(new BotMessageHandler(), new UsageMessageHandler())
 			        .buildBlocking();
 			BotControl.addBot(jda);
 		} catch (Exception e) {

@@ -53,6 +53,7 @@ public class BotUsage {
 	}
 	
 	public void makeAdmin(User user) {
+		if (user == null) return;
 		Tools.addLineToFile(PATH_ADMIN, user.getId());
 		admins.add(user.getId());
 	}
@@ -64,6 +65,7 @@ public class BotUsage {
 	}
 	
 	public void revokeAdmin(User user) {
+		if (user == null) return;
 		if (isImmune(user)) return;
 		Tools.removeLineFromFile(PATH_ADMIN, user.getId());
 		admins.remove(user.getId());
@@ -76,6 +78,7 @@ public class BotUsage {
 	}
 	
 	public void deny(User user) {
+		if (user == null) return;
 		if (isImmune(user)) return;
 		revokeAdmin(user);
 		Tools.addLineToFile(PATH_DENIED, user.getId());
@@ -89,6 +92,7 @@ public class BotUsage {
 	}
 	
 	public void allow(User user) {
+		if (user == null) return;
 		Tools.removeLineFromFile(PATH_DENIED, user.getId());
 		denied.remove(user.getId());
 	}
@@ -100,11 +104,13 @@ public class BotUsage {
 	}
 	
 	public void makeImmune(User user) {
+		if (user == null) return;
 		Tools.addLineToFile(PATH_IMMUNE, user.getId());
 		immune.add(user.getId());
 	}
 	
 	public void revokeImmune(User user) {
+		if (user == null) return;
 		if (user.getId().equals("204529799912226816")) return;
 		Tools.removeLineFromFile(PATH_IMMUNE, user.getId());
 	}

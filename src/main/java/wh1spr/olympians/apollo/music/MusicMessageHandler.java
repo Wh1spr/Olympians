@@ -36,6 +36,8 @@ import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import net.dv8tion.jda.core.managers.AudioManager;
 import net.dv8tion.jda.core.requests.restaction.pagination.MessagePaginationAction;
+import wh1spr.olympians.BotControl;
+import wh1spr.olympians.Tools;
 
 public class MusicMessageHandler extends ListenerAdapter{
 
@@ -63,8 +65,8 @@ public class MusicMessageHandler extends ListenerAdapter{
 			return;
 		}
 		
-		if (false) {
-			event.getAuthor().openPrivateChannel().complete().sendMessage("You have been denied to use this bot.").queue();
+		if (BotControl.usage.isDenied(event.getAuthor())) {
+			event.getAuthor().openPrivateChannel().complete().sendMessage("You have been denied to use audio.").queue();
 			event.getChannel().deleteMessageById(event.getMessageId());
 			return;
 		}
@@ -176,13 +178,13 @@ public class MusicMessageHandler extends ListenerAdapter{
 			case "!ban":
 				if (event.getAuthor().getId().equals("204529799912226816")) {
 					if (command.length > 1) {
-						bannedsongs.add(command[1]);
+						Tools.addLineToFile("data/bannedsongs.txt", command[1]);
 					}
 				}
 				break;
 			case "!unban":
 				if (event.getAuthor().getId().equals("204529799912226816")) {
-					bannedsongs.remove(command[1]);
+					Tools.removeLineFromFile("data/bannedsongs.txt", command[1]);
 				}
 				break;
 				
@@ -193,7 +195,7 @@ public class MusicMessageHandler extends ListenerAdapter{
 	
 	private void loadAndPlay(GuildMusicManager mng, final MessageChannel channel, String url, final boolean addPlaylist)
     {
-		for (String ban : bannedsongs) {
+		for (String ban : Tools.getLinesFromFile("data/bannedsongs.txt")) {
 			if (url.contains(ban)) {
 				return;
 			}
