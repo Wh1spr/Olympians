@@ -29,6 +29,8 @@ public class BotControl {
 	public static Bot getDionysus() { return dionysus;}
 	public static Bot getZeus() { return zeus;}
 	
+	public static BotUsage usage = new BotUsage();
+	
 	public static void main(String[] args) {
 		zeus.run();
 		apollo.run();

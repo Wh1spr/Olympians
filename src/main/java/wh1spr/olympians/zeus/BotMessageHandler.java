@@ -15,7 +15,7 @@ public class BotMessageHandler extends ListenerAdapter{
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		//Since Zeus controls ALL the bots, he should have following commands:
 		//shutdown (including other bots), start <name>, changegame [name] <game>, update, 
-		if (false) { //admin check
+		if (!BotControl.usage.isAdmin(event.getAuthor())) { //admin check
 			event.getChannel().deleteMessageById(event.getMessageId()).queue();
 			return;
 		}

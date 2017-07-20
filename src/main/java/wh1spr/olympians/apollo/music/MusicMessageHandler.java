@@ -168,6 +168,7 @@ public class MusicMessageHandler extends ListenerAdapter{
 			
 			case "!stop":
 				
+				mng.scheduler.queue.clear();
 				player.stopTrack();
 	            player.setPaused(false);
 				break;
