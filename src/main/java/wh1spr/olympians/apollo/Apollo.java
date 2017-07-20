@@ -4,6 +4,7 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import wh1spr.olympians.BotControl;
+import wh1spr.olympians.apollo.music.MusicMessageHandler;
 import wh1spr.olympians.template.Bot;
 
 public class Apollo implements Bot{
@@ -15,7 +16,7 @@ public class Apollo implements Bot{
 	public JDA run() {
 		try {
 			jda = new JDABuilder(AccountType.BOT)
-			        .setToken(TOKEN).addEventListener()
+			        .setToken(TOKEN).addEventListener(new MusicMessageHandler())
 			        .buildBlocking();
 		} catch (Exception e) {
 			System.out.println("[APOLLO] ERROR: Apollo could not be initialized. " + e.getClass().getSimpleName());
