@@ -31,13 +31,9 @@ public class Tools {
 	        stream.forEach(e->{lines.add(e);});
 	        stream.close();
 		} catch (IOException e) {
-			return null;
+			lines.clear();
 		}
-		if (lines.isEmpty()) {
-			return null;
-		} else {
-			return lines;
-		}
+		return lines;
 	}
 	
 	public static boolean addLineToFile(String filename, String lineToAdd) {
