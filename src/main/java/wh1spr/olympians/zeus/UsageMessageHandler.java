@@ -12,12 +12,14 @@ public class UsageMessageHandler extends ListenerAdapter {
 
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-		if (!BotControl.usage.isStaff(event.getAuthor(), event.getGuild())) { //admin check
-			event.getChannel().deleteMessageById(event.getMessageId()).queue();
+		
+		
+		if (!event.getMessage().getRawContent().startsWith(BC_PREFIX)) {
 			return;
 		}
 		
-		if (!event.getMessage().getRawContent().startsWith(BC_PREFIX)) {
+		if (!BotControl.usage.isStaff(event.getAuthor(), event.getGuild())) { //admin check
+			event.getChannel().deleteMessageById(event.getMessageId()).queue();
 			return;
 		}
 		
