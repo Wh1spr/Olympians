@@ -1,0 +1,43 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+version = '0.0.0_1'
+
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile 'com.sedmelluq:lavaplayer:1.2.42'
+  compile 'net.dv8tion:JDA:3.2.0_228'
+  compile fileTree(dir:'libs')
+  compile group: 'org.ini4j', name: 'ini4j', version: '0.5.1'
+}
+
+task makeJar(type: Jar) {
+	from('src/main/java') {
+      include  '**/*.ini'
+   	}
+	manifest {
+        attributes 'Implementation-Title': 'Olympians',
+        	'Implementation-Version': version,
+        	'Main-Class': 'wh1spr.olympians.BotControl'
+    }
+    baseName = 'Olympians'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task makeJarNoVersion(type: Jar) {
+	version = null
+	from('src/main/java') {
+      include  '**/*.ini'
+   	}
+	manifest {
+        attributes 'Implementation-Title': 'Olympians',
+        	'Main-Class': 'wh1spr.olympians.BotControl'
+    }
+    baseName = 'Olympians'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
