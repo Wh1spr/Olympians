@@ -37,7 +37,7 @@ public class Tools {
 	}
 	
 	public static boolean addLineToFile(String filename, String lineToAdd) {
-		try(FileWriter fw = new FileWriter(filename, true);
+		try(FileWriter fw = new FileWriter(new File(filename), true);
 			    BufferedWriter bw = new BufferedWriter(fw);
 			    PrintWriter out = new PrintWriter(bw))
 			{

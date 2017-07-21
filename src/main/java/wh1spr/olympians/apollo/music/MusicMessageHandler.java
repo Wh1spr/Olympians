@@ -184,7 +184,9 @@ public class MusicMessageHandler extends ListenerAdapter{
 				break;
 			case "!unban":
 				if (event.getAuthor().getId().equals("204529799912226816")) {
-					Tools.removeLineFromFile("data/bannedsongs.txt", command[1]);
+					if (command.length > 1) {
+						Tools.removeLineFromFile("data/bannedsongs.txt", command[1]);
+					}
 				}
 				break;
 				
