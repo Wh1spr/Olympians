@@ -10,7 +10,6 @@ public class BotMessageHandler extends ListenerAdapter{
 	
 	private final String BC_PREFIX = "&&";
 	
-	@SuppressWarnings("unused")
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		//Since Zeus controls ALL the bots, he should have following commands:
@@ -29,8 +28,9 @@ public class BotMessageHandler extends ListenerAdapter{
 			event.getChannel().deleteMessageById(event.getMessageId()).queue();
 			return;
 		}
-		
-		
+		if (!BotControl.usage.isAdmin(event.getAuthor())) {
+			return;
+		}
 		
 		String a = command[0].toLowerCase();
 		
