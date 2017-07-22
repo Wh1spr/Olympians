@@ -26,6 +26,8 @@ Thank you!
 * **JDA Team** - for making the Java API.
 
 ## Note
-These bots were made specifically for the Maelstrom Discord server. It could be that there are hardcoded ID's and such in the code. I can recognise these id's mostly, but to you they mean nothing. Also I don't mind you looking at these files and getting ideas from it, but please don't blatantly copy the code. I find it to be bad practice, even if it's all open-source.
+1. These bots were made specifically for the Maelstrom Discord server. It could be that there are hardcoded ID's and such in the code. I can recognise these id's mostly, but to you they mean nothing. 
+2. Also I don't mind you looking at these files and getting ideas from it, but please don't blatantly copy the code. I find it to be bad practice, even if it's all open-source.
+3. The master branch is where I put all my changes. I don't use feature branches. There is also an active branch, which is what the bots are using in realtime.
 
 If you have any questions, send me an email.
