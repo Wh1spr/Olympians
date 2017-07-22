@@ -30,6 +30,7 @@ public class BotControl {
 	public static Bot getZeus() { return zeus;}
 	
 	public static BotUsage usage = new BotUsage();
+	public static UserControl userControl = new UserControl();
 	
 	public static void main(String[] args) {
 		zeus.run();
@@ -48,8 +49,10 @@ public class BotControl {
 	public static int nrOfBots() {
 		return BotControl.bots.size();
 	}
-	
+
+	//I know that this isn't actually good but it's here now
 	public static void shutdown() {
+		BotControl.userControl.shutdown();
 		BotControl.apollo.shutdown();
 		BotControl.dionysus.shutdown();
 		BotControl.athena.shutdown();
