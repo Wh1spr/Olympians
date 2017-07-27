@@ -30,13 +30,14 @@ public class BotControl {
 	public static Bot getZeus() { return zeus;}
 	
 	public static BotUsage usage = new BotUsage();
-	public static UserControl userControl = new UserControl();
+	public static UserControl userControl;
 	
 	public static void main(String[] args) {
 		zeus.run();
 		apollo.run();
 		dionysus.run();
 		athena.run();
+		userControl = new UserControl();
 	}
 	
 	private static Set<JDA> bots = new HashSet<JDA>();
