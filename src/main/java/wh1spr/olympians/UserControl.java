@@ -47,11 +47,15 @@ public class UserControl {
 	private static Guild guild;
 	
 	public void permban(User user, int days, String reason) {
+		if (BotControl.usage.isImmune(user)) return;
+		if (BotControl.usage.isAdmin(user)) return;
 		guild.getController().ban(user, days, "BAN issued by Leader").queue();
 		Tools.addLineToFile("data/bans.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), reason));
 	}
 	
 	public void kick(User user, String reason) {
+		if (BotControl.usage.isImmune(user)) return;
+		if (BotControl.usage.isAdmin(user)) return;
 		guild.getController().kick(user.getId(), "KICK issued by Leader").queue();
 		Tools.addLineToFile("data/kicks.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), reason));
 	}
@@ -60,7 +64,9 @@ public class UserControl {
 	 * @param time The duration in milliseconds until ban has ended.
 	 */
 	public void tempban(User user, String reason, long time, int daysToDelete) {
-		guild.getController().ban(user, daysToDelete, "TEMPBAN issued by Leader or Staff.").queue();
+		if (BotControl.usage.isImmune(user)) return;
+		if (BotControl.usage.isAdmin(user)) return;
+		guild.getController().ban(user, daysToDelete, "TEMPBAN issued by Leader").queue();
 		Tools.addLineToFile("data/tempbans.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), reason));
 		timer.schedule(new unBanTask(user), time);
 	}
@@ -68,7 +74,9 @@ public class UserControl {
 	 * @param time The date at which to lift the ban.
 	 */
 	public void tempban(User user, String reason, Date time, int daysToDelete) {
-		guild.getController().ban(user, daysToDelete, "TEMPBAN issued by Leader or Staff.").queue();
+		if (BotControl.usage.isImmune(user)) return;
+		if (BotControl.usage.isAdmin(user)) return;
+		guild.getController().ban(user, daysToDelete, "TEMPBAN issued by Leader").queue();
 		Tools.addLineToFile("data/tempbans.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), reason));
 		timer.schedule(new unBanTask(user), time);
 	}
