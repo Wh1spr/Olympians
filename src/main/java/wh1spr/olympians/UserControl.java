@@ -1,5 +1,7 @@
 package wh1spr.olympians;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -45,24 +47,29 @@ public class UserControl {
 	private static Guild guild;
 	
 	public void permban(User user, int days, String reason) {
-		guild.getController().ban(user, days, "BAN issued by Leader");
-		Tools.addLineToFile("data/bans.txt", String.format("%s - %s", user.getName(), reason));
+		guild.getController().ban(user, days, "BAN issued by Leader").queue();
+		Tools.addLineToFile("data/bans.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), reason));
+	}
+	
+	public void kick(User user, String reason) {
+		guild.getController().kick(user.getId(), "KICK issued by Leader").queue();
+		Tools.addLineToFile("data/kicks.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), reason));
 	}
 	
 	/**
 	 * @param time The duration in milliseconds until ban has ended.
 	 */
 	public void tempban(User user, String reason, long time, int daysToDelete) {
-		guild.getController().ban(user, daysToDelete, "TEMPBAN issued by Leader or Staff.");
-		
+		guild.getController().ban(user, daysToDelete, "TEMPBAN issued by Leader or Staff.").queue();
+		Tools.addLineToFile("data/tempbans.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), reason));
 		timer.schedule(new unBanTask(user), time);
 	}
 	/**
 	 * @param time The date at which to lift the ban.
 	 */
 	public void tempban(User user, String reason, Date time, int daysToDelete) {
-		guild.getController().ban(user, daysToDelete, "TEMPBAN issued by Leader or Staff.");
-		
+		guild.getController().ban(user, daysToDelete, "TEMPBAN issued by Leader or Staff.").queue();
+		Tools.addLineToFile("data/tempbans.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), reason));
 		timer.schedule(new unBanTask(user), time);
 	}
 	private static class unBanTask extends TimerTask {
@@ -71,6 +78,10 @@ public class UserControl {
 		private boolean hasRun = false;
 		
 		public boolean hasRun() {return hasRun;}
+		
+		public User getUser() {
+			return this.user;
+		}
 		
 		public unBanTask(User user) {
 			this.user = user;
@@ -82,7 +93,8 @@ public class UserControl {
 			hasRun = true;
 			guild = BotControl.getZeus().getJDA().getGuildById("319896741233033216");
 			Invite invite = guild.getPublicChannel().createInvite().setMaxUses(1).complete();
-			guild.getController().unban(this.user);
+			guild.getController().unban(this.user).queue();
+			Tools.addLineToFile("data/kicks.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), "Unban event"));
 			user.openPrivateChannel().complete().sendMessage("Your tempban has been lifted. Here is your invite: discord.gg/" + invite.getCode()).queue();
 		}
 		
