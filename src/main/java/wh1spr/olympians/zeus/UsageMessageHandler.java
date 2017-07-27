@@ -36,6 +36,8 @@ public class UsageMessageHandler extends ListenerAdapter {
 		
 		String[] command = event.getMessage().getContent().split(" ",3);
 		BotUsage usage = BotControl.usage;
+		Guild guild = event.getGuild();
+		
 		
 		String a = command[0].toLowerCase();
 		String msg = "";
@@ -47,19 +49,23 @@ public class UsageMessageHandler extends ListenerAdapter {
 						msg += user.getAsMention() + "\n";
 					}
 				}
-				event.getChannel().sendMessage(new EmbedBuilder().addField("Don't betray my trust again.", msg, false).setColor(Color.green).build()).queue();
+				if (!msg.equals(""))
+					event.getChannel().sendMessage(new EmbedBuilder().addField("Don't betray my trust again.", msg, false).setColor(Color.green).build()).queue();
 				usage.allow(event.getMessage().getMentionedUsers());
 				break;
 			case "deny":
 				for (User user : event.getMessage().getMentionedUsers()) {
 					if (!Tools.isInFile("data/denied.txt", user.getId())) {
-						msg += user.getAsMention() + "\n";
+						if (!usage.isStaff(user, guild)) {	
+							msg += user.getAsMention() + "\n";
+						}
 					}
 				}
-				event.getChannel().sendMessage(new EmbedBuilder().addField("May these mortals live in eternal shame!", msg, false).setColor(Color.red).build()).queue();
+				if (!msg.equals(""))
+					event.getChannel().sendMessage(new EmbedBuilder().addField("May these mortals live in eternal shame!", msg, false).setColor(Color.red).build()).queue();
 				usage.deny(event.getMessage().getMentionedUsers());
 				break;
-			case "grantadmin":
+			case "grantadmin": //Only I can grant admin to others, this ID is mine.
 				if (event.getAuthor().getId().equals("204529799912226816")) {
 					for (User user : event.getMessage().getMentionedUsers()) {
 						if (!Tools.isInFile("data/admins.txt", user.getId())) {
@@ -68,24 +74,23 @@ public class UsageMessageHandler extends ListenerAdapter {
 					}
 					
 					usage.makeAdmin(event.getMessage().getMentionedUsers());
-					
-					event.getChannel().sendMessage(new EmbedBuilder().addField("Behold our new masters.", msg, false).setColor(Color.green).build()).queue();
+					if (!msg.equals(""))
+						event.getChannel().sendMessage(new EmbedBuilder().addField("Behold our new masters.", msg, false).setColor(Color.green).build()).queue();
 				}
 				break;
-			case "revokeadmin":
+			case "revokeadmin":  //admins can revoke admin from others, except for when the others are immune.
 				if (usage.isAdmin(event.getAuthor())) {
-					
-					
 					for (User user : event.getMessage().getMentionedUsers()) {
 						if (Tools.isInFile("data/admins.txt", user.getId())) {
 							msg += user.getAsMention() + "\n";
 						}
 					}
-					event.getChannel().sendMessage(new EmbedBuilder().addField("You are no longer above me.", msg, false).setColor(Color.orange).build()).queue();
+					if (!msg.equals(""))
+						event.getChannel().sendMessage(new EmbedBuilder().addField("You are no longer above me.", msg, false).setColor(Color.orange).build()).queue();
 					usage.revokeAdmin(event.getMessage().getMentionedUsers());
 				}
 				break;
-			case "grantimmunity":
+			case "grantimmunity": // Only I can grant or revoke Immunity. This ID is mine.
 				if (event.getAuthor().getId().equals("204529799912226816")) {
 					for (User user : event.getMessage().getMentionedUsers()) {
 						if (!Tools.isInFile("data/immune.txt", user.getId())) {

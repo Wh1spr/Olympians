@@ -23,6 +23,14 @@ public class Tools {
 		}
 	}
 	
+	public static boolean isInLineInFile(String filename, String toFind) {
+		try (Stream<String> stream = Files.lines(Paths.get(filename))) {
+	        return stream.anyMatch(e->e.contains(toFind));
+		} catch (IOException e) {
+			return false;
+		}
+	}
+	
 	public static List<String> getLinesFromFile(String filename) {
 	
 		List<String> lines = new ArrayList<String>();

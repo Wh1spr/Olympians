@@ -175,15 +175,15 @@ public class MusicMessageHandler extends ListenerAdapter{
 	            player.setPaused(false);
 				break;
 			
-			case "!ban":
-				if (event.getAuthor().getId().equals("204529799912226816")) {
+			case "!bansong":
+				if (BotControl.usage.isStaff(event.getAuthor(), guild)) {
 					if (command.length > 1) {
 						Tools.addLineToFile("data/bannedsongs.txt", command[1]);
 					}
 				}
 				break;
-			case "!unban":
-				if (event.getAuthor().getId().equals("204529799912226816")) {
+			case "!unbansong":
+				if (BotControl.usage.isStaff(event.getAuthor(), guild)) {
 					if (command.length > 1) {
 						Tools.removeLineFromFile("data/bannedsongs.txt", command[1]);
 					}
