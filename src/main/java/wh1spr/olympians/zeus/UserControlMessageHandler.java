@@ -38,7 +38,7 @@ public class UserControlMessageHandler extends ListenerAdapter{
 			return;
 		}
 		
-		String[] command = event.getMessage().getContent().split(" ",4);
+		String[] command = event.getMessage().getRawContent().split(" ");
 		
 		//For now, ONLY BOT ADMINS, or Leaders in Maelstrom's case who are all admins, can use these commands
 		// the check for staff above is there because in UsageMessageHandler, the same prefix is used, but staff
@@ -55,6 +55,7 @@ public class UserControlMessageHandler extends ListenerAdapter{
 			if (event.getMessage().getMentionedUsers().size() == 1) {
 				User toBan = event.getMessage().getMentionedUsers().get(0);
 				if (command.length > 3) {
+					command = event.getMessage().getRawContent().split(" ", 4);
 					BotControl.userControl.permban(toBan, Integer.valueOf(command[2]), command[3]);
 				}
 				if (Tools.isInLineInFile("data/bans.txt", toBan.getId())) {
@@ -66,7 +67,7 @@ public class UserControlMessageHandler extends ListenerAdapter{
 			if (event.getMessage().getMentionedUsers().size() == 1) {
 				User toBan = event.getMessage().getMentionedUsers().get(0);
 				if (command.length > 4) {
-					command = event.getMessage().getContent().split(" ", 5);
+					command = event.getMessage().getRawContent().split(" ", 5);
 					
 					Date now = cal.getTime();
 					
@@ -89,7 +90,7 @@ public class UserControlMessageHandler extends ListenerAdapter{
 			if (event.getMessage().getMentionedUsers().size() == 1) {
 				User toKick = event.getMessage().getMentionedUsers().get(0);
 				if (command.length > 2) {
-					command = event.getMessage().getContent().split(" ", 3);
+					command = event.getMessage().getRawContent().split(" ", 3);
 					BotControl.userControl.kick(toKick, command[2]);
 				}
 				if (Tools.isInLineInFile("data/kicks.txt", toKick.getId())) {
