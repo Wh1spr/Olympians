@@ -31,7 +31,7 @@ public class CommandHandler extends ListenerAdapter {
 		}
 		
 		//if this command exists
-		String cmdName = event.getMessage().getStrippedContent().split(" ")[0].replaceFirst(PREFIX, "");
+		String cmdName = event.getMessage().getStrippedContent().split(" ")[0].replaceFirst(PREFIX, "").toLowerCase();
 		if (registry.getRegisteredCommandsAndAliases().contains(cmdName)) {
 			Command cmd = registry.getCommand(cmdName).command;
 			List<String> args = new ArrayList<String>();
