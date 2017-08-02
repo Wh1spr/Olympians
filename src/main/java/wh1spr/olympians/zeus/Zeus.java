@@ -22,7 +22,7 @@ public class Zeus implements Bot{
 		//adminRegistry.registerCommand("", null);
 		
 		// BotControl
-		adminRegistry.registerCommand("shutdown", new ShutdownCommand(), "sd");
+		adminRegistry.registerCommand("shutdown", new ShutdownCommand());
 		adminRegistry.registerCommand("start", new StartCommand());
 		adminRegistry.registerCommand("changegame", new ChangeGameCommand(), "cg");
 		adminRegistry.registerCommand("update", new UpdateCommand(), "u");
