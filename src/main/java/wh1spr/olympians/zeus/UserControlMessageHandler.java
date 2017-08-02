@@ -31,13 +31,6 @@ public class UserControlMessageHandler extends ListenerAdapter{
 			return;
 		}
 		
-		Guild guild = event.getGuild();
-		if (!BotControl.usage.isStaff(event.getAuthor(), guild)) { //staff check
-			
-			event.getChannel().deleteMessageById(event.getMessageId()).queue();
-			return;
-		}
-		
 		String[] command = event.getMessage().getRawContent().split(" ");
 		
 		//For now, ONLY BOT ADMINS, or Leaders in Maelstrom's case who are all admins, can use these commands

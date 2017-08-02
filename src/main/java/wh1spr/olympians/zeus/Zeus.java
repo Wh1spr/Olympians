@@ -39,7 +39,7 @@ public class Zeus implements Bot{
 		
 		try {
 			jda = new JDABuilder(AccountType.BOT)
-			        .setToken(BotControl.ZEUS_TOKEN).addEventListener(new AutoEventHandler(), new UserControlMessageHandler(), new CommandHandler("&&", adminRegistry))
+			        .setToken(BotControl.ZEUS_TOKEN).addEventListener(new AutoEventHandler(), new CommandHandler("&&", adminRegistry))
 			        .buildBlocking();
 			BotControl.addBot(jda);
 		} catch (Exception e) {
