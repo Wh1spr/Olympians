@@ -86,6 +86,14 @@ public class MusicMessageHandler extends ListenerAdapter{
 	    String a = command[0].toLowerCase();
 	    
 	    switch (a) {
+	    	case "!shuffle":
+	    		mng.scheduler.shuffle();
+	    		break;
+	    	case "!repeat":
+	    		mng.scheduler.setRepeating(!mng.scheduler.isRepeating());
+	    		if (mng.scheduler.isRepeating()) event.getChannel().sendMessage("Player set to **Repeating** mode.").queue();
+	    		else event.getChannel().sendMessage("Player set to **Continue** mode.").queue();
+	    		break;
 			case "!join":
 				VoiceChannel channel;
 				
