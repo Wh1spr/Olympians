@@ -26,6 +26,51 @@ public class BotUsage {
 	private final Set<String> denied = new HashSet<String>();
 	private final Set<String> immune = new HashSet<String>();
 	
+	private final String ownerID = "204529799912226816";
+	
+	public String getOwnerId() {
+		return ownerID;
+	}
+	public User getOwner() {
+		return BotControl.getZeus().getJDA().getUserById(ownerID);
+	}
+	public Set<String> getAdminIds() {
+		Set<String> allAdmins = new HashSet<String>();
+		allAdmins.addAll(admins);
+		allAdmins.add(ownerID);
+		return allAdmins;
+	}
+	public Set<User> getAdmins() {
+		Set<User> allAdmins = new HashSet<User>();
+		admins.forEach(e->allAdmins.add(BotControl.getZeus().getJDA().getUserById(e)));
+		allAdmins.add(getOwner());
+		return allAdmins;
+	}
+	public Set<String> getImmuneIds() {
+		Set<String> immunes = new HashSet<String>();
+		immunes.addAll(immune);
+		return immunes;
+	}
+	public Set<User> getImmunes() {
+		Set<User> immunes = new HashSet<User>();
+		getImmuneIds().forEach(e->immunes.add(BotControl.getZeus().getJDA().getUserById(e)));
+		return immunes;
+	}
+	public Set<String> getDeniedIds() {
+		Set<String> denieds = new HashSet<String>(denied);
+		return denieds;
+	}
+	public Set<User> getDenied() {
+		Set<User> denieds = new HashSet<User>();
+		getDeniedIds().forEach(e->denieds.add(BotControl.getZeus().getJDA().getUserById(e)));
+		return denieds;
+	}
+	
+	
+	public boolean isOwner(User user) {
+		return user.getId().equals(ownerID);
+	}
+	
 	public boolean isDenied(User user) {
 		if (user.isBot()) return false;
 		if (denied.contains(user.getId())) return true;
@@ -38,13 +83,13 @@ public class BotUsage {
 		return false;
 	}
 	
-	public boolean isStaff(User user, Guild guild) {
-		if (user.isBot()) return true;
-		if (isDenied(user)) return false;
-		if (guild.getMember(user).getRoles().contains(guild.getRolesByName("staff", true))) return true;
-		if (isAdmin(user)) return true;
-		return false;
-	}
+//	public boolean isStaff(User user, Guild guild) {
+//		if (user.isBot()) return true;
+//		if (isDenied(user)) return false;
+//		if (guild.getMember(user).getRoles().contains(guild.getRolesByName("staff", true))) return true;
+//		if (isAdmin(user)) return true;
+//		return false;
+//	}
 	
 	public boolean isImmune(User user) {
 		if (immune.contains(user.getId())) return true;
@@ -54,6 +99,7 @@ public class BotUsage {
 	
 	public void makeAdmin(User user) {
 		if (user == null) return;
+		if (isDenied(user)) return;
 		Tools.addLineToFile(PATH_ADMIN, user.getId());
 		admins.add(user.getId());
 	}
@@ -111,7 +157,7 @@ public class BotUsage {
 	
 	public void revokeImmune(User user) {
 		if (user == null) return;
-		if (user.getId().equals("204529799912226816")) return;
+		if (isOwner(user)) return;
 		Tools.removeLineFromFile(PATH_IMMUNE, user.getId());
 	}
 	

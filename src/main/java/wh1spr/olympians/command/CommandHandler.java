@@ -26,7 +26,6 @@ public class CommandHandler extends ListenerAdapter {
 		if (!event.getMessage().getStrippedContent().startsWith(PREFIX)) return; 
 		
 		if (BotControl.usage.isDenied(event.getAuthor())) {
-			event.getChannel().deleteMessageById(event.getMessageId());
 			return; // no response on denied users
 		}
 		

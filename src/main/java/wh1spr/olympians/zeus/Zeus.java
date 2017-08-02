@@ -14,20 +14,33 @@ public class Zeus implements Bot{
 
 	private JDA jda = null;
 
+	public static final CommandRegistry adminRegistry = new CommandRegistry();
+	
 	@Override
 	public JDA run() {
-		CommandRegistry adminRegistry = new CommandRegistry();
-		
 		//for each command
-//		adminRegistry.registerCommand("", null);
+		//adminRegistry.registerCommand("", null);
+		
+		// BotControl
 		adminRegistry.registerCommand("shutdown", new ShutdownCommand());
 		adminRegistry.registerCommand("start", new StartCommand());
 		adminRegistry.registerCommand("changegame", new ChangeGameCommand(), "cg");
 		adminRegistry.registerCommand("update", new UpdateCommand(), "u");
+		adminRegistry.registerCommand("disablecmd", new CommandDisableCommand(), "dmcd");
+		
+		// BotUsage
+		adminRegistry.registerCommand("grantadmin", new AdminGrantCommand(), "ga");
+		adminRegistry.registerCommand("revokeadmin", new AdminRevokeCommand(), "ra");
+		adminRegistry.registerCommand("allow", new AllowCommand());
+		adminRegistry.registerCommand("deny", new DenyCommand());
+		adminRegistry.registerCommand("grantimmunity", new ImmunityGrantCommand(), "gi");
+		adminRegistry.registerCommand("revokeimmunity", new ImmunityRevokeCommand(), "ri");
+		
+		
 		
 		try {
 			jda = new JDABuilder(AccountType.BOT)
-			        .setToken(BotControl.ZEUS_TOKEN).addEventListener(new AutoEventHandler(), new UsageMessageHandler(), new UserControlMessageHandler(), new CommandHandler("&&", adminRegistry))
+			        .setToken(BotControl.ZEUS_TOKEN).addEventListener(new AutoEventHandler(), new CommandHandler("&&", adminRegistry))
 			        .buildBlocking();
 			BotControl.addBot(jda);
 		} catch (Exception e) {

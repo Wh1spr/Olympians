@@ -1,7 +1,6 @@
 package wh1spr.olympians.apollo.music;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -17,7 +16,7 @@ public class AudioScheduler extends AudioEventAdapter {
 	
 	private boolean repeating = false;
     final AudioPlayer player;
-    final Queue<AudioTrack> queue;
+    public final Queue<AudioTrack> queue;
     AudioTrack lastTrack;
     final TextChannel channel;
 
