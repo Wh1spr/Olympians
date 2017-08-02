@@ -184,14 +184,14 @@ public class MusicMessageHandler extends ListenerAdapter{
 				break;
 			
 			case "!bansong":
-				if (BotControl.usage.isStaff(event.getAuthor(), guild)) {
+				if (BotControl.usage.isAdmin(event.getAuthor())) {
 					if (command.length > 1) {
 						Tools.addLineToFile("data/bannedsongs.txt", command[1]);
 					}
 				}
 				break;
 			case "!unbansong":
-				if (BotControl.usage.isStaff(event.getAuthor(), guild)) {
+				if (BotControl.usage.isAdmin(event.getAuthor())) {
 					if (command.length > 1) {
 						Tools.removeLineFromFile("data/bannedsongs.txt", command[1]);
 					}

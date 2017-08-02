@@ -20,14 +20,26 @@ public class Zeus implements Bot{
 		
 		//for each command
 //		adminRegistry.registerCommand("", null);
-		adminRegistry.registerCommand("shutdown", new ShutdownCommand());
+		
+		// BotControl
+		adminRegistry.registerCommand("shutdown", new ShutdownCommand(), "sd");
 		adminRegistry.registerCommand("start", new StartCommand());
 		adminRegistry.registerCommand("changegame", new ChangeGameCommand(), "cg");
 		adminRegistry.registerCommand("update", new UpdateCommand(), "u");
 		
+		// BotUsage
+		adminRegistry.registerCommand("grantadmin", new AdminGrantCommand(), "ga");
+		adminRegistry.registerCommand("revokeadmin", new AdminRevokeCommand(), "ra");
+		adminRegistry.registerCommand("allow", new AllowCommand());
+		adminRegistry.registerCommand("deny", new DenyCommand());
+		adminRegistry.registerCommand("grantimmunity", new ImmunityGrantCommand(), "gi");
+		adminRegistry.registerCommand("revokeimmunity", new ImmunityRevokeCommand(), "ri");
+		
+		
+		
 		try {
 			jda = new JDABuilder(AccountType.BOT)
-			        .setToken(BotControl.ZEUS_TOKEN).addEventListener(new AutoEventHandler(), new UsageMessageHandler(), new UserControlMessageHandler(), new CommandHandler("&&", adminRegistry))
+			        .setToken(BotControl.ZEUS_TOKEN).addEventListener(new AutoEventHandler(), new UserControlMessageHandler(), new CommandHandler("&&", adminRegistry))
 			        .buildBlocking();
 			BotControl.addBot(jda);
 		} catch (Exception e) {

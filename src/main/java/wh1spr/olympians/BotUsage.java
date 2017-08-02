@@ -83,13 +83,13 @@ public class BotUsage {
 		return false;
 	}
 	
-	public boolean isStaff(User user, Guild guild) {
-		if (user.isBot()) return true;
-		if (isDenied(user)) return false;
-		if (guild.getMember(user).getRoles().contains(guild.getRolesByName("staff", true))) return true;
-		if (isAdmin(user)) return true;
-		return false;
-	}
+//	public boolean isStaff(User user, Guild guild) {
+//		if (user.isBot()) return true;
+//		if (isDenied(user)) return false;
+//		if (guild.getMember(user).getRoles().contains(guild.getRolesByName("staff", true))) return true;
+//		if (isAdmin(user)) return true;
+//		return false;
+//	}
 	
 	public boolean isImmune(User user) {
 		if (immune.contains(user.getId())) return true;
@@ -99,6 +99,7 @@ public class BotUsage {
 	
 	public void makeAdmin(User user) {
 		if (user == null) return;
+		if (isDenied(user)) return;
 		Tools.addLineToFile(PATH_ADMIN, user.getId());
 		admins.add(user.getId());
 	}
@@ -156,7 +157,7 @@ public class BotUsage {
 	
 	public void revokeImmune(User user) {
 		if (user == null) return;
-		if (user.getId().equals("204529799912226816")) return;
+		if (isOwner(user)) return;
 		Tools.removeLineFromFile(PATH_IMMUNE, user.getId());
 	}
 	
