@@ -14,18 +14,19 @@ public class Zeus implements Bot{
 
 	private JDA jda = null;
 
+	public static final CommandRegistry adminRegistry = new CommandRegistry();
+	
 	@Override
 	public JDA run() {
-		CommandRegistry adminRegistry = new CommandRegistry();
-		
 		//for each command
-//		adminRegistry.registerCommand("", null);
+		//adminRegistry.registerCommand("", null);
 		
 		// BotControl
 		adminRegistry.registerCommand("shutdown", new ShutdownCommand(), "sd");
 		adminRegistry.registerCommand("start", new StartCommand());
 		adminRegistry.registerCommand("changegame", new ChangeGameCommand(), "cg");
 		adminRegistry.registerCommand("update", new UpdateCommand(), "u");
+		adminRegistry.registerCommand("disablecmd", new CommandDisableCommand(), "dmcd");
 		
 		// BotUsage
 		adminRegistry.registerCommand("grantadmin", new AdminGrantCommand(), "ga");

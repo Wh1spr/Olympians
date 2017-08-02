@@ -19,15 +19,15 @@ public class BotControl {
 	public static final String ZEUS_TOKEN = "[REDACTED]";
 
 	//All the bots
-	private static Bot apollo = new Apollo();
-	private static Bot dionysus = new Dionysus();
-	private static Bot athena = new Athena();
-	private static Bot zeus = new Zeus();
+	private static Apollo apollo = new Apollo();
+	private static Dionysus dionysus = new Dionysus();
+	private static Athena athena = new Athena();
+	private static Zeus zeus = new Zeus();
 	
-	public static Bot getApollo() { return apollo;}
-	public static Bot getAthena() { return athena;}
-	public static Bot getDionysus() { return dionysus;}
-	public static Bot getZeus() { return zeus;}
+	public static Apollo getApollo() { return apollo;}
+	public static Athena getAthena() { return athena;}
+	public static Dionysus getDionysus() { return dionysus;}
+	public static Zeus getZeus() { return zeus;}
 	
 	public static BotUsage usage = new BotUsage();
 	public static UserControl userControl;
