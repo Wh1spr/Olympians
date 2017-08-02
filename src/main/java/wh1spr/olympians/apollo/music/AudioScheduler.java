@@ -1,6 +1,8 @@
 package wh1spr.olympians.apollo.music;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -23,8 +25,7 @@ public class AudioScheduler extends AudioEventAdapter {
     /**
      * @param player The audio player this scheduler uses
      */
-    public AudioScheduler(AudioPlayer player, TextChannel channel)
-    {
+    public AudioScheduler(AudioPlayer player, TextChannel channel) {
         this.player = player;
         this.queue = new LinkedBlockingQueue<AudioTrack>();
         this.channel = channel;
@@ -35,8 +36,7 @@ public class AudioScheduler extends AudioEventAdapter {
      *
      * @param track The track to play or add to queue.
      */
-    public void queue(AudioTrack track)
-    {
+    public void queue(AudioTrack track) {
     	if (!player.startTrack(track, true)) {
     		queue.offer(track);
     	}
@@ -45,8 +45,7 @@ public class AudioScheduler extends AudioEventAdapter {
     /**
      * Start the next track, stopping the current on if it is playing.
      */
-    public void nextTrack()
-    {
+    public void nextTrack() {
     	
         // Start the next track, regardless of if something is already playing or not. In case queue was empty, we are
         // giving null to startTrack, which is a valid argument and will simply stop the player.
@@ -56,8 +55,7 @@ public class AudioScheduler extends AudioEventAdapter {
     }
 
     @Override
-    public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason)
-    {
+    public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         this.lastTrack = track;
         // Only start the next track if the end reason is suitable for it (FINISHED or LOAD_FAILED)
         if (endReason.mayStartNext)
@@ -70,19 +68,25 @@ public class AudioScheduler extends AudioEventAdapter {
 
     }
 
-    public boolean isRepeating()
-    {
+    public boolean isRepeating() {
         return repeating;
     }
 
-    public void setRepeating(boolean repeating)
-    {
+    public void setRepeating(boolean repeating) {
         this.repeating = repeating;
     }
 
-    public void shuffle()
-    {
-        Collections.shuffle((List<?>) queue);
+    public void shuffle() {
+    	List<AudioTrack> tracks = new ArrayList<AudioTrack>();
+    	while (!queue.isEmpty()) {
+    		tracks.add(queue.poll());
+    	}
+    	Collections.shuffle(tracks);
+    	
+    	Iterator<AudioTrack> trackiterator = tracks.iterator();
+    	while(trackiterator.hasNext()) {
+    		queue.offer(trackiterator.next());
+    	}
     }
 
 }
