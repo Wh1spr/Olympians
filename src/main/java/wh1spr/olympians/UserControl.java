@@ -102,7 +102,7 @@ public class UserControl {
 			guild = BotControl.getZeus().getJDA().getGuildById("319896741233033216");
 			Invite invite = guild.getPublicChannel().createInvite().setMaxUses(1).complete();
 			guild.getController().unban(this.user).queue();
-			Tools.addLineToFile("data/bans.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), "Unban event"));
+			Tools.addLineToFile("data/tempbans.txt", String.format("%s - %s with ID [%s] - %s", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd kk:mm:ss")),user.getName(), user.getId(), "Unban event"));
 			user.openPrivateChannel().complete().sendMessage("Your tempban has been lifted. Here is your invite: discord.gg/" + invite.getCode()).queue();
 		}
 		

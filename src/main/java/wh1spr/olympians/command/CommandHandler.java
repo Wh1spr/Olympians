@@ -8,7 +8,7 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import wh1spr.olympians.BotControl;
 
-public class CommandHandler extends ListenerAdapter{
+public class CommandHandler extends ListenerAdapter {
 
 	public CommandHandler(String prefix, CommandRegistry registry) {
 		this.PREFIX = prefix;
