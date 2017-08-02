@@ -4,6 +4,7 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import wh1spr.olympians.BotControl;
+import wh1spr.olympians.apollo.music.Music;
 import wh1spr.olympians.apollo.music.commands.*;
 import wh1spr.olympians.command.CommandHandler;
 import wh1spr.olympians.command.CommandRegistry;
@@ -17,7 +18,7 @@ public class Apollo implements Bot{
 
 	@Override
 	public JDA run() {
-		
+		new Music();
 //		registry.registerCommand("", );
 		//TODO: queue command, for seeing the next X in queue (5 to 10, not sure)
 		registry.registerCommand("play", new PlayCommand());
