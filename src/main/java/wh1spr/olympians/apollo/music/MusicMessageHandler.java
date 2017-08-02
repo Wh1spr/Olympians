@@ -116,7 +116,7 @@ public class MusicMessageHandler extends ListenerAdapter{
 	                    event.getChannel().sendMessage("The current audio queue is empty! Add something to the queue first!").queue();
 	                }
 	            } else {
-	                loadAndPlay(mng, event.getChannel(), command[1], false);
+	                loadAndPlay(mng, event.getChannel(), command[1], true);
 	            }
 				break;
 			
