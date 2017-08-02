@@ -67,7 +67,7 @@ public class BotControl {
 	
 	public static void update() {
 		shutdown();
-		ProcessBuilder pb = new ProcessBuilder("./update.sh");
+		ProcessBuilder pb = new ProcessBuilder("./update.sh > update.txt");
 		try {
 			pb.start();
 		} catch (IOException e) {
