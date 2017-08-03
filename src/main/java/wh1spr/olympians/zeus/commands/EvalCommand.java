@@ -17,7 +17,7 @@ public class EvalCommand extends Command {
 
 	@Override
 	public void onCall(JDA jda, Guild guild, TextChannel channel, Member invoker, Message message, List<String> args) {
-		ScriptEngine se = new ScriptEngineManager().getEngineByName("Zeus");
+		ScriptEngine se = new ScriptEngineManager().getEngineByName("nashorn");
         se.put("jda", jda);
         se.put("guild", guild);
         se.put("channel", channel);
@@ -27,11 +27,11 @@ public class EvalCommand extends Command {
         se.put("athena", BotControl.getAthena());
         try
         {
-            channel.sendMessage(" Evaluated Successfully:\n```\n"+se.eval(message.getStrippedContent().split(" ",2)[1])+" ```").queue();
+            channel.sendMessage("Evaluated Successfully:\n```\n"+se.eval(message.getStrippedContent().split(" ",2)[1])+" ```").queue();
         } 
         catch(Exception e)
         {
-            channel.sendMessage(" An exception was thrown:\n```\n"+e+" ```").queue();
+            channel.sendMessage("An exception was thrown:\n```\n"+e+" ```").queue();
         }
 	}
 
