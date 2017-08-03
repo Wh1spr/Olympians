@@ -34,7 +34,6 @@ public class Apollo implements Bot{
 		registry.registerCommand("bansong", new BanSongCommand());
 		registry.registerCommand("unbansong", new UnbanSongCommand());
 		
-		
 		try {
 			jda = new JDABuilder(AccountType.BOT)
 			        .setToken(BotControl.APOLLO_TOKEN).addEventListener(new CommandHandler("!", registry))

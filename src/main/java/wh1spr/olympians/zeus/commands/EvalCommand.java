@@ -28,9 +28,7 @@ public class EvalCommand extends Command {
         se.put("dionysus", BotControl.getDionysus());
         se.put("athena", BotControl.getAthena());
         se.put("usage", BotControl.usage);
-        if (BotControl.usage.isOwner(invoker.getUser()))
-        	se.put("admin", net.dv8tion.jda.core.Permission.ADMINISTRATOR);
-        
+      
         try
         {
             channel.sendMessage("Evaluated Successfully:\n```\n"+se.eval(message.getStrippedContent().split(" ",2)[1])+" ```").queue();
