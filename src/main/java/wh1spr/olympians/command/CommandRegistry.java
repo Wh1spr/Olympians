@@ -10,6 +10,7 @@ import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import wh1spr.olympians.apollo.Apollo;
+import wh1spr.olympians.dionysus.Dionysus;
 import wh1spr.olympians.zeus.Zeus;
 
 public  class CommandRegistry {
@@ -51,6 +52,7 @@ public  class CommandRegistry {
 
         Zeus.adminRegistry.registry.put(name, entry);
         Apollo.registry.registry.put(name, entry);
+        Dionysus.registry.registry.put(name, entry);
         
     }
 
