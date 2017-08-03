@@ -36,6 +36,9 @@ public class Zeus implements Bot{
 		adminRegistry.registerCommand("grantimmunity", new ImmunityGrantCommand(), "gi");
 		adminRegistry.registerCommand("revokeimmunity", new ImmunityRevokeCommand(), "ri");
 		
+		// Extra
+		adminRegistry.registerCommand("eval", new EvalCommand());
+		
 		
 		
 		try {
