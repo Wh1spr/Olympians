@@ -34,7 +34,7 @@ public class CommandHandler extends ListenerAdapter {
 		if (registry.getRegisteredCommandsAndAliases().contains(cmdName)) {
 			Command cmd = registry.getCommand(cmdName).command;
 			List<String> args = new ArrayList<String>();
-			args.addAll(Arrays.asList(event.getMessage().getStrippedContent().split(" ")));
+			args.addAll(Arrays.asList(event.getMessage().getRawContent().split(" ")));
 			args.remove(0);
 			cmd.onCall(event.getJDA(), event.getGuild(), event.getChannel(), event.getMember(), event.getMessage(), args);
 		}
