@@ -4,17 +4,27 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import wh1spr.olympians.BotControl;
+import wh1spr.olympians.command.CommandHandler;
+import wh1spr.olympians.command.CommandRegistry;
+import wh1spr.olympians.dionysus.commands.*;
 import wh1spr.olympians.template.Bot;
 
 public class Dionysus implements Bot{
 
 	private JDA jda = null;
 
+	public static final CommandRegistry registry = new CommandRegistry();
+	
 	@Override
 	public JDA run() {
+		
+		//registry.registerCommand("", null);
+		
+		registry.registerCommand("ayy", new AyyLmaoCommand());
+		
 		try {
 			jda = new JDABuilder(AccountType.BOT)
-			        .setToken(BotControl.DIONYSUS_TOKEN).addEventListener()
+			        .setToken(BotControl.DIONYSUS_TOKEN).addEventListener(new CommandHandler(".", registry))
 			        .buildBlocking();
 			BotControl.addBot(jda);
 		} catch (Exception e) {

@@ -26,7 +26,7 @@ public class Zeus implements Bot{
 		adminRegistry.registerCommand("start", new StartCommand());
 		adminRegistry.registerCommand("changegame", new ChangeGameCommand(), "cg");
 		adminRegistry.registerCommand("update", new UpdateCommand(), "u");
-		adminRegistry.registerCommand("disablecmd", new CommandDisableCommand(), "dmcd");
+		adminRegistry.registerCommand("disablecmd", new CommandDisableCommand(), "dcmd");
 		
 		// BotUsage
 		adminRegistry.registerCommand("grantadmin", new AdminGrantCommand(), "ga");
@@ -38,7 +38,6 @@ public class Zeus implements Bot{
 		
 		// Extra
 		adminRegistry.registerCommand("eval", new EvalCommand());
-		
 		
 		
 		try {
