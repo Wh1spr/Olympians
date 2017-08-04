@@ -41,7 +41,7 @@ public  class CommandRegistry {
         CommandEntry entry = new CommandEntry(new Command() {
             @Override
             public void onCall(JDA jda, Guild guild, TextChannel channel, Member invoker, Message message, List<String> args ) {
-                channel.sendMessage("This command is temporarily disabled");
+                channel.sendMessage("This command is temporarily disabled").queue();
             }
 
             @Override
