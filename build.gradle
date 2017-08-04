@@ -11,7 +11,7 @@ dependencies {
   compile 'com.sedmelluq:lavaplayer:1.2.42'
   compile 'net.dv8tion:JDA:3.2.0_228'
   compile fileTree(dir:'libs')
-  compile group: 'org.ini4j', name: 'ini4j', version: '0.5.1'
+  compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
 }
 
 task makeJar(type: Jar) {

@@ -24,7 +24,7 @@ public class UserControl {
 	private static final List<TimerTask> scheduledTasks = new ArrayList<TimerTask>();
 	
 	public void shutdown() {
-		Iterator it = scheduledTasks.iterator();
+		Iterator<TimerTask> it = scheduledTasks.iterator();
 		while (it.hasNext()) {
 			TimerTask next = (TimerTask) it.next();
 			if (next instanceof unBanTask) {
