@@ -23,7 +23,7 @@ public class CleanCommand extends Command {
 	public void onCall(JDA jda, Guild guild, TextChannel channel, Member invoker, Message message, List<String> args) {
 		if (!BotControl.usage.isAdmin(invoker.getUser())) return;
 			
-		if (!message.getMentionedUsers().isEmpty() && message.getMentionedUsers().size() == (args.size() + 1)) {
+		if (!message.getMentionedUsers().isEmpty() && message.getMentionedUsers().size() < args.size()) {
 			int nr = 0;
 			try {
 				nr = Integer.valueOf(args.get(0));
