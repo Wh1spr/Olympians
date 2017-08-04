@@ -21,6 +21,7 @@ public class Dionysus implements Bot{
 		//registry.registerCommand("", null);
 		
 		registry.registerCommand("ayy", new AyyLmaoCommand());
+		registry.registerCommand("gitgud", new GitGudCommand());
 		
 		try {
 			jda = new JDABuilder(AccountType.BOT)
