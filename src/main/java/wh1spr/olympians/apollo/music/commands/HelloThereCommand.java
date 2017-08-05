@@ -31,13 +31,8 @@ public class HelloThereCommand extends Command {
 			Music.mngs.put(guild.getId(), mng);
 		}
 		
-		boolean skip = false;
-		if (!mng.scheduler.queue.isEmpty()) skip = true;
-		
 		loadAndPlay(mng, channel, "eaEMSKzqGAg", false);
 		
-		if (skip)
-			mng.scheduler.nextTrack();
 	}
 	
 	private void loadAndPlay(GuildMusicManager mng, final MessageChannel channel, String url, final boolean addPlaylist) {
@@ -55,16 +50,22 @@ public class HelloThereCommand extends Command {
             @Override
             public void trackLoaded(AudioTrack track)
             {
-                List<AudioTrack> tracks = new ArrayList<AudioTrack>();
-            	while (!mng.scheduler.queue.isEmpty()) {
-            		tracks.add(mng.scheduler.queue.poll());
-            	}
-            	tracks.add(0, track);
-            	
-            	Iterator<AudioTrack> trackiterator = tracks.iterator();
-            	while(trackiterator.hasNext()) {
-            		mng.scheduler.queue.offer(trackiterator.next());
-            	}
+            	if (mng.player.getPlayingTrack() != null) {
+            		AudioTrack wasplaying = mng.player.getPlayingTrack();
+	                List<AudioTrack> tracks = new ArrayList<AudioTrack>();
+	            	while (!mng.scheduler.queue.isEmpty()) {
+	            		tracks.add(mng.scheduler.queue.poll());
+	            	}
+	            	tracks.add(0, wasplaying);
+	            	
+	            	Iterator<AudioTrack> trackiterator = tracks.iterator();
+	            	while(trackiterator.hasNext()) {
+	            		mng.scheduler.queue.offer(trackiterator.next());
+	            	} 
+	            	mng.player.startTrack(track, false);
+	            } else {
+	            	mng.player.startTrack(track, false);
+	            }
             }
 
             @Override
