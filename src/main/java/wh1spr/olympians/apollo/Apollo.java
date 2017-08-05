@@ -33,6 +33,7 @@ public class Apollo implements Bot{
 		registry.registerCommand("join", new JoinCommand());
 		registry.registerCommand("bansong", new BanSongCommand());
 		registry.registerCommand("unbansong", new UnbanSongCommand());
+		registry.registerCommand("hellothere", new HelloThereCommand(), "ht");
 		
 		try {
 			jda = new JDABuilder(AccountType.BOT)
