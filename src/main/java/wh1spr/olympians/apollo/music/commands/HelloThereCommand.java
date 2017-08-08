@@ -56,7 +56,7 @@ public class HelloThereCommand extends Command {
 	            	while (!mng.scheduler.queue.isEmpty()) {
 	            		tracks.add(mng.scheduler.queue.poll());
 	            	}
-	            	tracks.add(0, wasplaying);
+	            	tracks.add(0, wasplaying.makeClone());
 	            	
 	            	Iterator<AudioTrack> trackiterator = tracks.iterator();
 	            	while(trackiterator.hasNext()) {
