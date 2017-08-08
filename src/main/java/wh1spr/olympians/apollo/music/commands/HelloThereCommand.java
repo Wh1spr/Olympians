@@ -52,17 +52,22 @@ public class HelloThereCommand extends Command {
             {
             	if (mng.player.getPlayingTrack() != null) {
             		AudioTrack wasplaying = mng.player.getPlayingTrack();
+            		long playingPos = wasplaying.getPosition();
 	                List<AudioTrack> tracks = new ArrayList<AudioTrack>();
 	            	while (!mng.scheduler.queue.isEmpty()) {
 	            		tracks.add(mng.scheduler.queue.poll());
 	            	}
-	            	tracks.add(0, wasplaying.makeClone());
+	            	
+	            	AudioTrack newTrack = wasplaying.makeClone();
+	            	newTrack.setPosition(playingPos);
+	            	tracks.add(0, newTrack);
 	            	
 	            	Iterator<AudioTrack> trackiterator = tracks.iterator();
 	            	while(trackiterator.hasNext()) {
 	            		mng.scheduler.queue.offer(trackiterator.next());
 	            	} 
 	            	mng.player.startTrack(track, false);
+	            	mng.scheduler.noMessageOnNext = true;
 	            } else {
 	            	mng.player.startTrack(track, false);
 	            }

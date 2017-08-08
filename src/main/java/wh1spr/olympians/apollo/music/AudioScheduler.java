@@ -39,9 +39,13 @@ public class AudioScheduler extends AudioEventAdapter {
     public void queue(AudioTrack track) {
     	if (!player.startTrack(track, true)) {
     		queue.offer(track);
+    	} else {
+    		if (channel != null) if (player.getPlayingTrack() != null) channel.sendMessage("**Playing: ** " + player.getPlayingTrack().getInfo().title).queue();
     	}
     }
 
+    public boolean noMessageOnNext = false;
+    
     /**
      * Start the next track, stopping the current on if it is playing.
      */
@@ -50,8 +54,9 @@ public class AudioScheduler extends AudioEventAdapter {
         // Start the next track, regardless of if something is already playing or not. In case queue was empty, we are
         // giving null to startTrack, which is a valid argument and will simply stop the player.
         player.startTrack(queue.poll(), false);
-        if (channel != null) if (player.getPlayingTrack() != null) channel.sendMessage("**Playing: ** " + player.getPlayingTrack().getInfo().title).queue();
-       
+        
+        if (!noMessageOnNext) if (channel != null) if (player.getPlayingTrack() != null) channel.sendMessage("**Playing: ** " + player.getPlayingTrack().getInfo().title).queue();
+        else noMessageOnNext = false;
     }
 
     @Override
