@@ -20,7 +20,13 @@ import wh1spr.olympians.apollo.music.GuildMusicManager;
 import wh1spr.olympians.apollo.music.Music;
 import wh1spr.olympians.command.Command;
 
-public class HelloThereCommand extends Command {
+public class YtInterruptCommand extends Command {
+	
+	public YtInterruptCommand(String url) {
+		URL = url;
+	}
+	
+	private final String URL;
 
 	@Override
 	public void onCall(JDA jda, Guild guild, TextChannel channel, Member invoker, Message message, List<String> args) {
@@ -31,7 +37,7 @@ public class HelloThereCommand extends Command {
 			Music.mngs.put(guild.getId(), mng);
 		}
 		
-		loadAndPlay(mng, channel, "eaEMSKzqGAg", false);
+		loadAndPlay(mng, channel, URL, false);
 		
 	}
 	
