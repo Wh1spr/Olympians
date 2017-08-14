@@ -8,5 +8,6 @@ public class AutoEventHandler extends ListenerAdapter {
 	@Override
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
 		if (event.getGuild().getId().equals("319896741233033216")) event.getGuild().getController().addRolesToMember(event.getMember(), event.getGuild().getRoleById("319920322100985858"));
+		if (event.getGuild().getId().equals("346039066942373898")) event.getGuild().getController().addRolesToMember(event.getMember(), event.getGuild().getRoleById("346041592311840768"));
 	}
 }
